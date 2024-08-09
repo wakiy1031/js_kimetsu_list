@@ -15,6 +15,7 @@ function getCategoryFileName(category) {
 }
 
 async function fetchCharacters(category = 'all') {
+  showLoading();
   try {
     const fileName = getCategoryFileName(category);
     const response = await fetch(`${API_URL}${fileName}.json`);
@@ -22,9 +23,12 @@ async function fetchCharacters(category = 'all') {
       throw new Error(`サーバーエラーです。`);
     }
     const characters = await response.json();
+    await new Promise(resolve => setTimeout(resolve, 500));
     displayCharacters(characters);
   } catch (error) {
     console.error( "エラー：", error.message );
+  } finally {
+    hideLoading();
   }
 }
 
@@ -42,6 +46,18 @@ function displayCharacters(characters) {
     `;
     container.appendChild(characterElement);
   });
+}
+
+function showLoading() {
+  const loading = document.getElementById('loading');
+  loading.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function hideLoading() {
+  const loading = document.getElementById('loading');
+  loading.style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 document.querySelectorAll('input[name="category"]').forEach(radio => {
