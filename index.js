@@ -1,10 +1,31 @@
 const GITHUB_URL = 'https://ihatov08.github.io/';
 const API_URL = 'https://ihatov08.github.io/kimetsu_api/api/';
 
-async function fetchCharacters() {
-  const response = await fetch(`${API_URL}all.json`);
-  const characters = await response.json();
-  displayCharacters(characters);
+function getCategoryFileName(category) {
+  switch(category) {
+    case '鬼殺隊':
+      return 'kisatsutai';
+    case '柱':
+      return 'hashira';
+    case '鬼':
+      return 'oni';
+    default:
+      return 'all';
+  }
+}
+
+async function fetchCharacters(category = 'all') {
+  try {
+    const fileName = getCategoryFileName(category);
+    const response = await fetch(`${API_URL}${fileName}.json`);
+    if (!response.ok) {
+      throw new Error(`サーバーエラーです。`);
+    }
+    const characters = await response.json();
+    displayCharacters(characters);
+  } catch (error) {
+    console.error( "エラー：", error.message );
+  }
 }
 
 function displayCharacters(characters) {
@@ -22,5 +43,11 @@ function displayCharacters(characters) {
     container.appendChild(characterElement);
   });
 }
+
+document.querySelectorAll('input[name="category"]').forEach(radio => {
+  radio.addEventListener('change', (event) => {
+    fetchCharacters(event.target.value);
+  });
+});
 
 fetchCharacters();
