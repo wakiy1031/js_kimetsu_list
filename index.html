@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鬼の刃キャラクター一覧</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>鬼の刃キャラクター一覧</h1>
+  <div>
+    <input type="radio" name="category" id="all" value="all" checked>
+    <label for="all">全キャラクター</label>
+    <input type="radio" name="category" id="kisatsutai" value="kisatsutai">
+    <label for="kisatsutai">鬼殺隊</label>
+    <input type="radio" name="category" id="hashira" value="hashira">
+    <label for="hashira">柱</label>
+    <input type="radio" name="category" id="oni" value="oni">
+    <label for="oni">鬼</label>
+  </div>
+  <div id="character-container"></div>
+  <div id="loading">読み込み中...</div>
+  <script src="index.js"></script>
+</body>
+</html>
