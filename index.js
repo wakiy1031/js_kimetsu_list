@@ -1,24 +1,10 @@
 const GITHUB_URL = 'https://ihatov08.github.io/';
 const API_URL = 'https://ihatov08.github.io/kimetsu_api/api/';
 
-const getCategoryFileName = (category) => {
-  switch(category) {
-    case 'kisatsutai':
-      return 'kisatsutai';
-    case 'hashira':
-      return 'hashira';
-    case 'oni':
-      return 'oni';
-    default:
-      return 'all';
-  }
-};
-
 const fetchCharacters = async (category = 'all') => {
   showLoading();
   try {
-    const fileName = getCategoryFileName(category);
-    const response = await fetch(`${API_URL}${fileName}.json`);
+    const response = await fetch(`${API_URL}${category}.json`);
     if (!response.ok) {
       throw new Error(`サーバーエラーです。`);
     }
