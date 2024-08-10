@@ -3,11 +3,11 @@ const API_URL = 'https://ihatov08.github.io/kimetsu_api/api/';
 
 const getCategoryFileName = (category) => {
   switch(category) {
-    case '鬼殺隊':
+    case 'kisatsutai':
       return 'kisatsutai';
-    case '柱':
+    case 'hashira':
       return 'hashira';
-    case '鬼':
+    case 'oni':
       return 'oni';
     default:
       return 'all';
